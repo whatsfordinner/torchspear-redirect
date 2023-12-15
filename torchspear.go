@@ -71,9 +71,21 @@ func NewTorchspearRedirectStack(scope constructs.Construct, id string, props *To
 		Target: awsroute53.RecordTarget_FromAlias(awsroute53targets.NewCloudFrontTarget(cdn)),
 	})
 
+	awsroute53.NewAaaaRecord(stack, jsii.String("WwwAaaaRecord"), &awsroute53.AaaaRecordProps{
+		Zone:       zone,
+		RecordName: jsii.String("www"),
+		Target:     awsroute53.RecordTarget_FromAlias(awsroute53targets.NewCloudFrontTarget(cdn)),
+	})
+
 	awsroute53.NewARecord(stack, jsii.String("ARecord"), &awsroute53.ARecordProps{
 		Zone:   zone,
 		Target: awsroute53.RecordTarget_FromAlias(awsroute53targets.NewCloudFrontTarget(cdn)),
+	})
+
+	awsroute53.NewARecord(stack, jsii.String("WwwARecord"), &awsroute53.ARecordProps{
+		Zone:       zone,
+		RecordName: jsii.String("www"),
+		Target:     awsroute53.RecordTarget_FromAlias(awsroute53targets.NewCloudFrontTarget(cdn)),
 	})
 
 	return stack
